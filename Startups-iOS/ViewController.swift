@@ -14,11 +14,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet var startupsTable: UITableView!
     var startupsList = Array<Startup>()
+    var viewStartupLabel = "Startup List"
 
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = self.viewStartupLabel
         // set up a listener:
         let notificationCtr = NSNotificationCenter.defaultCenter()
         notificationCtr.addObserver(
