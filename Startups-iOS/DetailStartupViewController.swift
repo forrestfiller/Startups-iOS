@@ -5,6 +5,10 @@
 //  Created by Forrest Filler on 7/25/16.
 //  Copyright © 2016 forrestfiller. All rights reserved.
 //
+//       HW for Wednesday
+// add methodologies where you can update the various startup characteristics to the initial Vc
+
+
 
 import UIKit
 import Alamofire
@@ -55,6 +59,13 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
         startupInfo["image"] = self.imageTextField.text!
         
         print("updateStartup: \(startupInfo.description)")
+        let url = "https://ff-startups.herokuapp.com/api/startup/"+self.startup._id!
+        Alamofire.request(.PUT, url, parameters: startupInfo).responseJSON { response in
+            // startupInfo is the package we are sending that we prepared.
+            if let json = response.result.value as? Dictionary<String, AnyObject>{
+                print("\(json)")
+            }
+        }
     }
 
 
