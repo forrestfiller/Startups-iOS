@@ -18,8 +18,13 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
     var startup: Startup!
     var startupsList = Array<Startup>()
     var startupImage: UIImageView!
-    var imageTextField: UITextField!
     
+    var nameTextField: UITextField!
+    var cityTextField: UITextField!
+    var founderTextField: UITextField!
+    var imageTextField: UITextField!
+    var sharesTextField: UITextField!
+
     override func loadView() {
         let frame = UIScreen.mainScreen().bounds
         let view = UIView(frame: frame)
@@ -30,7 +35,35 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
         self.startupImage.center = CGPoint(x: 0.5*frame.size.width, y: 160)
         view.addSubview(self.startupImage)
         
+    
         var y = self.startupImage.frame.origin.y+self.startupImage.frame.size.height+20
+        self.nameTextField = UITextField(frame: CGRect(x: 20, y: y, width: frame.size.width-40, height: 32))
+        self.nameTextField.delegate = self
+        self.nameTextField.placeholder = "startup name"
+        self.nameTextField.borderStyle = .RoundedRect
+        self.nameTextField.autocapitalizationType = .None
+        self.nameTextField.autocorrectionType = .No
+        view.addSubview(self.nameTextField)
+        y += self.nameTextField.frame.size.height+5
+        
+        self.cityTextField = UITextField(frame: CGRect(x: 20, y: y, width: frame.size.width-40, height: 32))
+        self.cityTextField.delegate = self
+        self.cityTextField.placeholder = "city name"
+        self.cityTextField.borderStyle = .RoundedRect
+        self.cityTextField.autocapitalizationType = .None
+        self.cityTextField.autocorrectionType = .No
+        view.addSubview(self.cityTextField)
+        y += self.cityTextField.frame.size.height+5
+        
+        self.founderTextField = UITextField(frame: CGRect(x: 20, y: y, width: frame.size.width-40, height: 32))
+        self.founderTextField.delegate = self
+        self.founderTextField.placeholder = "founder name"
+        self.founderTextField.borderStyle = .RoundedRect
+        self.founderTextField.autocapitalizationType = .None
+        self.founderTextField.autocorrectionType = .No
+        view.addSubview(self.founderTextField)
+        y += self.founderTextField.frame.size.height+5
+        
         self.imageTextField = UITextField(frame: CGRect(x: 20, y: y, width: frame.size.width-40, height: 32))
         self.imageTextField.delegate = self
         self.imageTextField.placeholder = "image name"
@@ -38,12 +71,21 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
         self.imageTextField.autocapitalizationType = .None
         self.imageTextField.autocorrectionType = .No
         view.addSubview(self.imageTextField)
-        y += self.imageTextField.frame.size.height+20
+        y += self.imageTextField.frame.size.height+5
+        
+        self.sharesTextField = UITextField(frame: CGRect(x: 20, y: y, width: frame.size.width-40, height: 32))
+        self.sharesTextField.delegate = self
+        self.sharesTextField.placeholder = "shares in millions"
+        self.sharesTextField.borderStyle = .RoundedRect
+        self.sharesTextField.autocapitalizationType = .None
+        self.sharesTextField.autocorrectionType = .No
+        view.addSubview(self.sharesTextField)
+        y += self.sharesTextField.frame.size.height+20
         
         let btnSubmit = UIButton(type: .Custom)
         btnSubmit.backgroundColor = .blueColor()
         btnSubmit.frame = CGRect(x: 20, y: y, width: frame.size.width-40, height: 44)
-        btnSubmit.setTitle("Update Image", forState: .Normal)
+        btnSubmit.setTitle("Update Information", forState: .Normal)
         btnSubmit.setTitleColor(.whiteColor(), forState: .Normal)
         btnSubmit.addTarget(self, action: #selector(DetailStartupViewController.updateStartup), forControlEvents: .TouchUpInside)
         view.addSubview(btnSubmit)
