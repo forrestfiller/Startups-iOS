@@ -54,7 +54,7 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
         startupInfo["_id"] = self.startup._id!
         startupInfo["image"] = self.imageTextField.text!
         
-        print(" \(startupInfo.description)")
+        print("updateStartup: \(startupInfo.description)")
     }
 
 
