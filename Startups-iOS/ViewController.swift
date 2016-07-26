@@ -11,8 +11,11 @@ import Alamofire
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    
     @IBOutlet var startupsTable: UITableView!
     var startupsList = Array<Startup>()
+
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,13 +29,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         )
         
         
-        self.navigationController?.navigationBar.barTintColor = .lightGrayColor()
+        //self.navigationController?.navigationBar.barTintColor = .lightGrayColor()
         
         let url = "https://ff-startups.herokuapp.com/api/startup"
         Alamofire.request(.GET, url, parameters:  nil).responseJSON { response in
             if let json = response.result.value as? Dictionary<String, AnyObject>{
+                
                 if let results = json["results"] as? Array<Dictionary<String, AnyObject>>{
-//                    print("\(results)")
+
                     for startupInfo in results {
                         let startup = Startup()
                         startup.populate(startupInfo)
@@ -87,7 +91,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
         tableView.deselectRowAtIndexPath(tableView.indexPathForSelectedRow!, animated: true)
+        
+        let startup = self.startupsList[indexPath.row]
+        let detailVc = DetailStartupViewController()
+        detailVc.startup = startup
+        self.navigationController?.pushViewController(detailVc, animated: true)
     }
+    
 
     
     

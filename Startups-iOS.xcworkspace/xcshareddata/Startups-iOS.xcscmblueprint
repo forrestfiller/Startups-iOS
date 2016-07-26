@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "032DA2CC02295F2581D8F652C4F20EB716F96005",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "208BE3FC4DD8ED3B422337B75275D2C4E46F255C" : 0,
+    "032DA2CC02295F2581D8F652C4F20EB716F96005" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "CE97E07C-8865-4701-B2E0-4FDEB6079760",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "208BE3FC4DD8ED3B422337B75275D2C4E46F255C" : "",
+    "032DA2CC02295F2581D8F652C4F20EB716F96005" : "Startups-iOS\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Startups-iOS",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Startups-iOS.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/forrestfiller\/Startups-iOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "032DA2CC02295F2581D8F652C4F20EB716F96005"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/forrestfiller\/InstagramAPI.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "208BE3FC4DD8ED3B422337B75275D2C4E46F255C"
+    }
+  ]
+}

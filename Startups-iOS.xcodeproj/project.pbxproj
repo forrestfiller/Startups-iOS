@@ -14,6 +14,7 @@
 		B7DFAF791D46C42D00F9ADD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7DFAF781D46C42D00F9ADD5 /* Assets.xcassets */; };
 		B7DFAF7C1D46C42D00F9ADD5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7DFAF7A1D46C42D00F9ADD5 /* LaunchScreen.storyboard */; };
 		B7DFAF851D46C8CC00F9ADD5 /* Startup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DFAF841D46C8CC00F9ADD5 /* Startup.swift */; };
+		B7DFAF871D46D86900F9ADD5 /* DetailStartupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DFAF861D46D86900F9ADD5 /* DetailStartupViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		B7DFAF7B1D46C42D00F9ADD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B7DFAF7D1D46C42D00F9ADD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B7DFAF841D46C8CC00F9ADD5 /* Startup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Startup.swift; sourceTree = "<group>"; };
+		B7DFAF861D46D86900F9ADD5 /* DetailStartupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailStartupViewController.swift; sourceTree = "<group>"; };
 		D96A5CD2A69D0533785371FF /* Pods-Startups-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Startups-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Startups-iOS/Pods-Startups-iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,6 +76,7 @@
 				B7DFAF831D46C8B500F9ADD5 /* Models */,
 				B7DFAF711D46C42D00F9ADD5 /* AppDelegate.swift */,
 				B7DFAF731D46C42D00F9ADD5 /* ViewController.swift */,
+				B7DFAF861D46D86900F9ADD5 /* DetailStartupViewController.swift */,
 				B7DFAF751D46C42D00F9ADD5 /* Main.storyboard */,
 				B7DFAF781D46C42D00F9ADD5 /* Assets.xcassets */,
 				B7DFAF7A1D46C42D00F9ADD5 /* LaunchScreen.storyboard */,
@@ -224,6 +227,7 @@
 				B7DFAF741D46C42D00F9ADD5 /* ViewController.swift in Sources */,
 				B7DFAF851D46C8CC00F9ADD5 /* Startup.swift in Sources */,
 				B7DFAF721D46C42D00F9ADD5 /* AppDelegate.swift in Sources */,
+				B7DFAF871D46D86900F9ADD5 /* DetailStartupViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
