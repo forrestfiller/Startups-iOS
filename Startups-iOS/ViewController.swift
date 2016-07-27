@@ -67,8 +67,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let startup = self.startupsList[indexPath.row]
         let cellId = "cellId"
         if let cell = tableView.dequeueReusableCellWithIdentifier(cellId){
-            cell.textLabel?.text = startup.name
-            cell.detailTextLabel?.text = startup.city
+            cell.textLabel?.text = startup.name!+"   "+startup.city!
+            cell.detailTextLabel?.text = "Founder: "+startup.founder!
+            //+"Worth: $\(startup.shares)"
             if (startup.imageData != nil){
                 cell.imageView?.image = startup.imageData
                 return cell
@@ -77,8 +78,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             return cell
         }
         let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
-        cell.textLabel?.text = startup.name
-        cell.detailTextLabel?.text = startup.city
+        cell.textLabel?.text = startup.name!+"   "+startup.city!
+        cell.detailTextLabel?.text = "Founder: "+startup.founder!
+        //+"Worth: $\(startup.shares)"
         if (startup.imageData != nil){
             cell.imageView?.image = startup.imageData
             return cell

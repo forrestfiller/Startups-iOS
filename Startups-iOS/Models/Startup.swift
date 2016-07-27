@@ -18,6 +18,7 @@ class Startup: NSObject {
     var shares: Int?
     var imageData: UIImage?
     var isFetching = false
+    var insertSpaceOneTab = "    "
     
     
     
@@ -37,6 +38,10 @@ class Startup: NSObject {
             else {
                 self.image = _image
             }
+        }
+        
+        if let _shares = startupInfo["shares"] as? Int {
+            self.shares = _shares
         }
     }
     

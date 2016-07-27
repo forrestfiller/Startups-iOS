@@ -5,9 +5,6 @@
 //  Created by Forrest Filler on 7/25/16.
 //  Copyright © 2016 forrestfiller. All rights reserved.
 //
-//       HW for Wednesday
-// add methodologies where you can update the various startup characteristics to the initial Vc
-
 
 
 import UIKit
@@ -24,7 +21,8 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
     var founderTextField: UITextField!
     var imageTextField: UITextField!
     var sharesTextField: UITextField!
-
+    var btnSubmit: UIButton!
+    
     override func loadView() {
         let frame = UIScreen.mainScreen().bounds
         let view = UIView(frame: frame)
@@ -35,7 +33,6 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
         self.startupImage.center = CGPoint(x: 0.5*frame.size.width, y: 160)
         view.addSubview(self.startupImage)
         
-    
         var y = self.startupImage.frame.origin.y+self.startupImage.frame.size.height+20
         self.nameTextField = UITextField(frame: CGRect(x: 20, y: y, width: frame.size.width-40, height: 32))
         self.nameTextField.delegate = self
@@ -82,38 +79,48 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(self.sharesTextField)
         y += self.sharesTextField.frame.size.height+20
         
-        let btnSubmit = UIButton(type: .Custom)
-        btnSubmit.backgroundColor = .blueColor()
-        btnSubmit.frame = CGRect(x: 20, y: y, width: frame.size.width-40, height: 44)
-        btnSubmit.setTitle("Update Information", forState: .Normal)
-        btnSubmit.setTitleColor(.whiteColor(), forState: .Normal)
-        btnSubmit.addTarget(self, action: #selector(DetailStartupViewController.updateStartup), forControlEvents: .TouchUpInside)
-        view.addSubview(btnSubmit)
-
-        
+        self.btnSubmit = UIButton(type: .Custom)
+        self.btnSubmit.backgroundColor = .blueColor()
+        self.btnSubmit.frame = CGRect(x: 20, y: y, width: frame.size.width-40, height: 44)
+        self.btnSubmit.setTitle("Update Startup Info", forState: .Normal)
+        self.btnSubmit.setTitleColor(.whiteColor(), forState: .Normal)
+        self.btnSubmit.addTarget(self, action: #selector(DetailStartupViewController.updateStartup), forControlEvents: .TouchUpInside)
+//        self.btnSubmit.addTarget(self, action: #selector(DetailStartupViewController.popBack), forControlEvents: .TouchUpInside)
+        view.addSubview(self.btnSubmit)
         self.view = view
     }
     
     func updateStartup() {
-        // preparinga  package of info to send ot the server, and will make a correcsponsing update
+        // prepare the package to send to backend, where JSON will update.
+        
         var startupInfo = Dictionary<String, AnyObject>()
         startupInfo["_id"] = self.startup._id!
+        startupInfo["name"] = self.nameTextField.text!
+        startupInfo["city"] = self.cityTextField.text!
+        startupInfo["founder"] = self.founderTextField.text!
         startupInfo["image"] = self.imageTextField.text!
-        
+//        startupInfo["shares"] = self.sharesTextField.text!
+
         print("updateStartup: \(startupInfo.description)")
         let url = "https://ff-startups.herokuapp.com/api/startup/"+self.startup._id!
         Alamofire.request(.PUT, url, parameters: startupInfo).responseJSON { response in
-            // startupInfo is the package we are sending that we prepared.
+            // startupInfo is the package.
             if let json = response.result.value as? Dictionary<String, AnyObject>{
                 print("\(json)")
             }
         }
     }
-
+    
+    func popBack() {
+//  This func to push back to the Vc
+//        let initialVc = ViewController()
+//        self.navigationController?.pushViewController(initialVc, animated: true)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = self.startup.name
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -122,9 +129,9 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool{
-        imageTextField.resignFirstResponder()
-        let searchText = self.imageTextField.text!
-        print("textFieldShouldReturn: \(searchText)")
+//        imageTextField.resignFirstResponder()
+//        let searchText = self.imageTextField.text!
+//        print("textFieldShouldReturn: \(searchText)")
 //        let startup = Startup()
 //        startup.fetchImage()
 //        self.startupsList.removeAll()
