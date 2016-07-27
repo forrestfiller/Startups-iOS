@@ -91,7 +91,6 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
         self.btnSubmit.setTitle("Update Startup Info", forState: .Normal)
         self.btnSubmit.setTitleColor(.whiteColor(), forState: .Normal)
         self.btnSubmit.addTarget(self, action: #selector(DetailStartupViewController.updateStartup), forControlEvents: .TouchUpInside)
-//        self.btnSubmit.addTarget(self, action: #selector(DetailStartupViewController.popBack), forControlEvents: .TouchUpInside)
         view.addSubview(self.btnSubmit)
         self.view = view
     }
@@ -103,7 +102,6 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
         startupInfo["city"] = self.cityTextField.text!
         startupInfo["founder"] = self.founderTextField.text!
         startupInfo["shares"] = self.sharesTextField.text!
-        //startupInfo["image"] = self.imageTextField.text!
         
         let img = self.imageTextField.text!
         if (img != self.startup.image){ // user selects new image
@@ -116,8 +114,7 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
         Alamofire.request(.PUT, url, parameters: startupInfo).responseJSON { response in
             // startupInfo is the package.
             if let json = response.result.value as? Dictionary<String, AnyObject>{
-                //print("\(json)")
-                
+
                 if let result = json["result"] as? Dictionary<String, AnyObject>{
                     print("\(json)")
                     
@@ -131,7 +128,6 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = self.startup.name
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -143,6 +139,4 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-
-
 }

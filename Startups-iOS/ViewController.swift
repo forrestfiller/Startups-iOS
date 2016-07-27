@@ -38,7 +38,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                         let startup = Startup()
                         startup.populate(startupInfo)
                         self.startupsList.append(startup)
-                        
                     }
                     self.startupsTable.reloadData()
                 }
