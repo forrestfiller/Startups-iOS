@@ -41,6 +41,7 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
         self.nameTextField.borderStyle = .RoundedRect
         self.nameTextField.autocapitalizationType = .None
         self.nameTextField.autocorrectionType = .No
+        self.nameTextField.text = self.startup.name
         view.addSubview(self.nameTextField)
         y += self.nameTextField.frame.size.height+5
         
@@ -50,6 +51,7 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
         self.cityTextField.borderStyle = .RoundedRect
         self.cityTextField.autocapitalizationType = .None
         self.cityTextField.autocorrectionType = .No
+        self.cityTextField.text = self.startup.city
         view.addSubview(self.cityTextField)
         y += self.cityTextField.frame.size.height+5
         
@@ -59,6 +61,7 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
         self.founderTextField.borderStyle = .RoundedRect
         self.founderTextField.autocapitalizationType = .None
         self.founderTextField.autocorrectionType = .No
+        self.founderTextField.text = self.startup.founder
         view.addSubview(self.founderTextField)
         y += self.founderTextField.frame.size.height+5
         
@@ -68,6 +71,7 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
         self.imageTextField.borderStyle = .RoundedRect
         self.imageTextField.autocapitalizationType = .None
         self.imageTextField.autocorrectionType = .No
+        self.imageTextField.text = self.startup.image
         view.addSubview(self.imageTextField)
         y += self.imageTextField.frame.size.height+5
         
@@ -77,6 +81,7 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
         self.sharesTextField.borderStyle = .RoundedRect
         self.sharesTextField.autocapitalizationType = .None
         self.sharesTextField.autocorrectionType = .No
+        //self.sharesTextField.text = self.startup.shares
         view.addSubview(self.sharesTextField)
         y += self.sharesTextField.frame.size.height+20
         
@@ -97,7 +102,15 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
         startupInfo["name"] = self.nameTextField.text!
         startupInfo["city"] = self.cityTextField.text!
         startupInfo["founder"] = self.founderTextField.text!
-        startupInfo["image"] = self.imageTextField.text!
+        //startupInfo["image"] = self.imageTextField.text!
+        
+        let img = self.imageTextField.text!
+        if (img != self.startup.image){ // user selects new image
+            self.startup.imageData = nil
+            startupInfo["image"] = img
+        }
+        
+        
 //        startupInfo["shares"] = self.sharesTextField.text!
 
         print("updateStartup: \(startupInfo.description)")
@@ -105,7 +118,14 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
         Alamofire.request(.PUT, url, parameters: startupInfo).responseJSON { response in
             // startupInfo is the package.
             if let json = response.result.value as? Dictionary<String, AnyObject>{
-                print("\(json)")
+                //print("\(json)")
+                
+                if let result = json["result"] as? Dictionary<String, AnyObject>{
+                    print("\(json)")
+                    
+                    self.startup.populate(result)
+                    self.navigationController?.popViewControllerAnimated(true)
+                }
             }
         }
     }

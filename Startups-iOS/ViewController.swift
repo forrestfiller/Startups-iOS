@@ -49,6 +49,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.startupsTable.reloadData()
+    }
+    
     func imageDownloadNotification(){
         self.startupsTable.reloadData()
     }
