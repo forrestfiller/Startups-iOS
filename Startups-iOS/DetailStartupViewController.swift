@@ -81,7 +81,7 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
         self.sharesTextField.borderStyle = .RoundedRect
         self.sharesTextField.autocapitalizationType = .None
         self.sharesTextField.autocorrectionType = .No
-        //self.sharesTextField.text = self.startup.shares
+        self.sharesTextField.text = String(self.startup.shares!)
         view.addSubview(self.sharesTextField)
         y += self.sharesTextField.frame.size.height+20
         
@@ -102,6 +102,7 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
         startupInfo["name"] = self.nameTextField.text!
         startupInfo["city"] = self.cityTextField.text!
         startupInfo["founder"] = self.founderTextField.text!
+        startupInfo["shares"] = self.sharesTextField.text!
         //startupInfo["image"] = self.imageTextField.text!
         
         let img = self.imageTextField.text!
@@ -109,9 +110,6 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
             self.startup.imageData = nil
             startupInfo["image"] = img
         }
-        
-        
-//        startupInfo["shares"] = self.sharesTextField.text!
 
         print("updateStartup: \(startupInfo.description)")
         let url = "https://ff-startups.herokuapp.com/api/startup/"+self.startup._id!

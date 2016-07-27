@@ -28,6 +28,10 @@ class Startup: NSObject {
             self.setValue(value, forKey: prop)
         }
         
+        if let _shares = startupInfo["shares"] as? Int {
+            self.shares = _shares
+        }
+        
         if let _image = startupInfo["image"] as? String {
             if (_image.characters.count == 0){
                 self.image = "placeholder.jpg"
