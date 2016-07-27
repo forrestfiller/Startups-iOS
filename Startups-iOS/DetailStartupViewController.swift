@@ -40,7 +40,8 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
             ["placeholder":"Founder", "property":"founderTextField"],
             ["placeholder":"City", "property":"cityTextField"],
             ["placeholder":"Name", "property":"nameTextField"],
-            ["placeholder":"Image", "property":"imageTextField"]
+            ["placeholder":"Image", "property":"imageTextField"],
+            ["placeholder":"Shares", "property":"sharesTextField"]
         ]
         
         for i in 0..<fields.count {
@@ -65,12 +66,12 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
             }
             
             view.addSubview(field)
-            y += field.frame.size.height+20
+            y += field.frame.size.height+10
         }
 
         self.btnSubmit = UIButton(type: .Custom)
         self.btnSubmit.backgroundColor = .blueColor()
-        self.btnSubmit.frame = CGRect(x: 20, y: y, width: frame.size.width-40, height: 44)
+        self.btnSubmit.frame = CGRect(x: 20, y: y+40, width: frame.size.width-40, height: 44)
         self.btnSubmit.setTitle("Update Startup Info", forState: .Normal)
         self.btnSubmit.setTitleColor(.whiteColor(), forState: .Normal)
         self.btnSubmit.addTarget(self, action: #selector(DetailStartupViewController.updateStartup), forControlEvents: .TouchUpInside)
