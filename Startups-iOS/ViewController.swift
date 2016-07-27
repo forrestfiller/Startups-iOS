@@ -11,13 +11,10 @@ import Alamofire
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    
     @IBOutlet var startupsTable: UITableView!
     var startupsList = Array<Startup>()
     var viewStartupLabel = "Startup List"
 
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,10 +27,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             name: "ImageDownloaded",
             object: nil
         )
-        
-        
-        //self.navigationController?.navigationBar.barTintColor = .lightGrayColor()
-        
+
         let url = "https://ff-startups.herokuapp.com/api/startup"
         Alamofire.request(.GET, url, parameters:  nil).responseJSON { response in
             if let json = response.result.value as? Dictionary<String, AnyObject>{
@@ -64,23 +58,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let startup = self.startupsList[indexPath.row]
         let cellId = "cellId"
         if let cell = tableView.dequeueReusableCellWithIdentifier(cellId){
             cell.textLabel?.text = startup.name!+"   "+startup.city!
             cell.detailTextLabel?.text = "Founder: "+startup.founder!
-            //+"Worth: $\(startup.shares)"
+
             if (startup.imageData != nil){
                 cell.imageView?.image = startup.imageData
                 return cell
             }
+
             startup.fetchImage()
             return cell
         }
+        
         let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
         cell.textLabel?.text = startup.name!+"   "+startup.city!
         cell.detailTextLabel?.text = "Founder: "+startup.founder!
-        //+"Worth: $\(startup.shares)"
+
         if (startup.imageData != nil){
             cell.imageView?.image = startup.imageData
             return cell
@@ -102,17 +99,5 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         detailVc.startup = startup
         self.navigationController?.pushViewController(detailVc, animated: true)
     }
-    
 
-    
-    
-    
-    
-
-    
-    // Fin.
 }
-
-
-
-

@@ -18,10 +18,7 @@ class Startup: NSObject {
     var shares: Int?
     var imageData: UIImage?
     var isFetching = false
-    var insertSpaceOneTab = "    "
-    
-    
-    
+
     func populate(startupInfo: Dictionary<String, AnyObject>){
         //can use this only with your dbackend matches up perfectly with these variables
         // only do this is your backend is yours, as if your backend keys change you will have a fail.
@@ -38,10 +35,6 @@ class Startup: NSObject {
             else {
                 self.image = _image
             }
-        }
-        
-        if let _shares = startupInfo["shares"] as? Int {
-            self.shares = _shares
         }
     }
     

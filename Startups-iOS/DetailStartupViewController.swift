@@ -86,14 +86,12 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
         self.btnSubmit.setTitle("Update Startup Info", forState: .Normal)
         self.btnSubmit.setTitleColor(.whiteColor(), forState: .Normal)
         self.btnSubmit.addTarget(self, action: #selector(DetailStartupViewController.updateStartup), forControlEvents: .TouchUpInside)
-        self.btnSubmit.addTarget(self, action: #selector(DetailStartupViewController.popBack), forControlEvents: .TouchUpInside)
+//        self.btnSubmit.addTarget(self, action: #selector(DetailStartupViewController.popBack), forControlEvents: .TouchUpInside)
         view.addSubview(self.btnSubmit)
         self.view = view
     }
     
-    func updateStartup() {
-        // prepare the package to send to backend, where JSON will update.
-        
+    func updateStartup() { // prepare the package to send to backend, where JSON will update.
         var startupInfo = Dictionary<String, AnyObject>()
         startupInfo["_id"] = self.startup._id!
         startupInfo["name"] = self.nameTextField.text!
@@ -111,14 +109,6 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
-    
-    func popBack() {
-//  This func to push back to the Vc
-        let initialVc = ViewController()
-        self.navigationController?.pushViewController(self.initialVc, animated: true)
-        
-//        self.navigationController!.pushViewController(self.storyboard!.instantiateViewControllerWithIdentifier("ViewController") as UIViewController, animated: true
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,12 +122,6 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool{
-//        imageTextField.resignFirstResponder()
-//        let searchText = self.imageTextField.text!
-//        print("textFieldShouldReturn: \(searchText)")
-//        let startup = Startup()
-//        startup.fetchImage()
-//        self.startupsList.removeAll()
         return true
     }
     
