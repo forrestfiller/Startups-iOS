@@ -56,7 +56,6 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
             field.autocapitalizationType = .None
             field.autocorrectionType = .No
             
-//            let propertyName = fieldInfo["name"]
             let propertyName = field.placeholder?.lowercaseString
             if (propertyName == "shares"){
                 field.text = String(self.startup.shares!)

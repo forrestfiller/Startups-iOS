@@ -14,11 +14,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet var startupsTable: UITableView!
     var startupsList = Array<Startup>()
     var viewStartupLabel = "Startup List"
+    var startupVc = Startup()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .Add,
+            target: self,
+            action: #selector(ViewController.createStartup)
+        )
         self.title = self.viewStartupLabel
+        
         // set up a listener:
         let notificationCtr = NSNotificationCenter.defaultCenter()
         notificationCtr.addObserver(
@@ -54,6 +60,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.startupsTable.reloadData()
     }
     
+    func createStartup() {
+        print("createStartup: ")
+        
+        let createStartupVc = CreateStartupViewController()
+        self.presentViewController(createStartupVc, animated: true, completion: nil)
+//pop goes back; push is for forward and showing more information
+//present is for creating something new; dismiss is when something comes from the top
+// HIG human interface guidelines for programmers
+    }
+    
     func imageDownloadNotification(){
         self.startupsTable.reloadData()
     }
@@ -63,12 +79,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
+
         let startup = self.startupsList[indexPath.row]
         let cellId = "cellId"
         if let cell = tableView.dequeueReusableCellWithIdentifier(cellId){
             cell.textLabel?.text = startup.name!+"   "+startup.city!
-            cell.detailTextLabel?.text = "Founder: "+startup.founder!
+            cell.detailTextLabel?.text = "Founder: "+startup.founder!+", "
 
             if (startup.imageData != nil){
                 cell.imageView?.image = startup.imageData
@@ -77,11 +93,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
             startup.fetchImage()
             return cell
+            
+            if (startup.shares == String){
+                
+                return cell
+            }
         }
+        
         
         let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
         cell.textLabel?.text = startup.name!+"   "+startup.city!
-        cell.detailTextLabel?.text = "Founder: "+startup.founder!
+        cell.detailTextLabel?.text = "Founder: "+startup.founder!+", "
 
         if (startup.imageData != nil){
             cell.imageView?.image = startup.imageData

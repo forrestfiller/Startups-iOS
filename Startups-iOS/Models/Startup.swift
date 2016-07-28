@@ -19,13 +19,20 @@ class Startup: NSObject {
     var imageData: UIImage?
     var isFetching = false
 
+    
+
     func populate(startupInfo: Dictionary<String, AnyObject>){
         //can use this only with your dbackend matches up perfectly with these variables
         // only do this is your backend is yours, as if your backend keys change you will have a fail.
-        let props = [ "_id", "name", "city", "founder"] // image was taken out of the array
+        let props = ["name", "city", "founder"]
         for prop in props {
             let value = startupInfo[prop]
             self.setValue(value, forKey: prop)
+        }
+
+        if let __id = startupInfo["_id"] as? String {
+            self._id = __id
+            print("id breakdown?")
         }
         
         if let _shares = startupInfo["shares"] as? Int {
