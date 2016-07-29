@@ -16,6 +16,7 @@ class Startup: NSObject {
     var founder: String?
     var image: String?
     var shares: Int?
+    var sharesData: Int?
     var imageData: UIImage?
     var isFetching = false
 
@@ -32,7 +33,7 @@ class Startup: NSObject {
 
         if let __id = startupInfo["_id"] as? String {
             self._id = __id
-            print("id breakdown?")
+            // this works fine for each cell it prints--> print("id breakdown?")
         }
         
         if let _shares = startupInfo["shares"] as? Int {

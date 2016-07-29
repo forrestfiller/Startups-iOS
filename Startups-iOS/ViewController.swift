@@ -93,11 +93,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
             startup.fetchImage()
             return cell
-            
-            if (startup.shares == String){
-                
-                return cell
-            }
+//            
+//            if case let (startup.shares) = String(startup.shares){
+//                return cell
+//            }
+//            else {
+//                String(startup.shares)
+//                return cell
+//            }
         }
         
         

@@ -17,7 +17,7 @@ class CreateStartupViewController: UIViewController, UITextFieldDelegate {
     var startup: Startup!
     let initialVc = ViewController()
     var startupsList = Array<Startup>()
-//    var startupImage: UIImageView!
+    var startupImage: UIImageView!
     
     var nameTextField: UITextField!
     var cityTextField: UITextField!
@@ -81,7 +81,7 @@ class CreateStartupViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool{
-        print("textFieldShouldReturn")
+        //print("textFieldShouldReturn")
         self.createStartup()
         return true
     }
@@ -94,17 +94,18 @@ class CreateStartupViewController: UIViewController, UITextFieldDelegate {
         startupInfo["founder"] = self.founderTextField.text!
         startupInfo["shares"] = self.sharesTextField.text!
 
-       //print("createStartup: \(startupInfo.description)")
+       //print("createStartup - package prepped: \(startupInfo.description)")
         
         let url = "https://ff-startups.herokuapp.com/api/startup/"
         Alamofire.request(.POST, url, parameters: startupInfo).responseJSON { response in
             // startupInfo is the package.
-            //print("send package")
+            //print("sending the package via Alamofire call 1 of 4")
             if let json = response.result.value as? Dictionary<String, AnyObject>{
-                
+                //print("sending the package via Alamofire call 2 of 4")
                 if let result = json["result"] as? Dictionary<String, AnyObject>{
-                    //print("\(json)")
+                    //print("3 of 4: \(json)")
                     
+                    // HERE IS THE ISSUE --> need to handle this. No print call for populate.
                     self.startup.populate(result)
                     print("populate??")
                     //self.navigationController?.popViewControllerAnimated(true)
