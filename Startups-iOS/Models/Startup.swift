@@ -74,6 +74,31 @@ class Startup: NSObject {
             }
         }
     }
+    
+    func append(startupInfo: Dictionary<String, AnyObject>){
+        
+        let props = ["_id", "name", "city", "founder"]
+        for prop in props {
+            let value = startupInfo[prop] as? Dictionary<String, AnyObject>
+            self.append(value!)
+        }
+        
+        if let _shares = startupInfo["shares"] as? Int {
+            self.shares = _shares
+            
+        }
+        
+        if let _image = startupInfo["image"] as? String {
+            if (_image.characters.count == 0){
+                self.image = "placeholder.jpg"
+            }
+            else {
+                self.image = _image
+                
+            }
+        }
+    }
+
 }
 
 

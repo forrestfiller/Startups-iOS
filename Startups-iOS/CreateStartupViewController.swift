@@ -93,6 +93,8 @@ class CreateStartupViewController: UIViewController, UITextFieldDelegate {
         startupInfo["city"] = self.cityTextField.text!
         startupInfo["founder"] = self.founderTextField.text!
         startupInfo["shares"] = self.sharesTextField.text!
+        //startupInfo["image"] = self.imageTextField.text!
+        
 
        //print("createStartup - package prepped: \(startupInfo.description)")
         
@@ -106,6 +108,7 @@ class CreateStartupViewController: UIViewController, UITextFieldDelegate {
                     //print("3 of 4: \(json)")
                     
                     // HERE IS THE ISSUE --> need to handle this. No print call for populate.
+                    //self.startup.populate(result)
                     self.startup.populate(result)
                     print("populate??")
                     //self.navigationController?.popViewControllerAnimated(true)

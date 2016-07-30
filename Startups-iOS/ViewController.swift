@@ -84,7 +84,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let cellId = "cellId"
         if let cell = tableView.dequeueReusableCellWithIdentifier(cellId){
             cell.textLabel?.text = startup.name!+"   "+startup.city!
-            cell.detailTextLabel?.text = "Founder: "+startup.founder!+", "
+            cell.detailTextLabel?.text = "Founder: "+startup.founder!
 
             if (startup.imageData != nil){
                 cell.imageView?.image = startup.imageData
@@ -115,6 +115,31 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         startup.fetchImage()
         return cell
     }
+    
+    func handlePackageFromCreateVc(startupInfo: Dictionary<String, AnyObject>){
+        print("handlePackageFromCreateVc: \(startupInfo)")
+        
+        if let newCreateName = startupInfo["name"] as? String{
+            let newName = Startup()
+            newName.name = newCreateName
+            self.startupsList.append(newCreateName)
+            self.startupsTable.reloadData()
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+    }
+    
+//    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]){
+//        print("didFinishPickingMediaWithInfo: \(info)")
+//        
+//        if let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+//            let image = ISImage()
+//            image.image = selectedImage
+//            image.caption = "Default Caption"
+//            self.imagesArray.append(image)
+//            self.imagesTable.reloadData()
+//            picker.dismissViewControllerAnimated(true, completion: nil)
+//        }
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
