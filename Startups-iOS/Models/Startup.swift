@@ -19,9 +19,7 @@ class Startup: NSObject {
     var sharesData: Int?
     var imageData: UIImage?
     var isFetching = false
-
     
-
     func populate(startupInfo: Dictionary<String, AnyObject>){
         //can use this only with your dbackend matches up perfectly with these variables
         // only do this is your backend is yours, as if your backend keys change you will have a fail.
@@ -33,7 +31,6 @@ class Startup: NSObject {
 
         if let __id = startupInfo["_id"] as? String {
             self._id = __id
-            // this works fine for each cell it prints--> print("id breakdown?")
         }
         
         if let _shares = startupInfo["shares"] as? Int {
@@ -74,31 +71,29 @@ class Startup: NSObject {
             }
         }
     }
-    
-    func append(startupInfo: Dictionary<String, AnyObject>){
-        
-        let props = ["_id", "name", "city", "founder"]
-        for prop in props {
-            let value = startupInfo[prop] as? Dictionary<String, AnyObject>
-            self.append(value!)
-        }
-        
-        if let _shares = startupInfo["shares"] as? Int {
-            self.shares = _shares
-            
-        }
-        
-        if let _image = startupInfo["image"] as? String {
-            if (_image.characters.count == 0){
-                self.image = "placeholder.jpg"
-            }
-            else {
-                self.image = _image
-                
-            }
-        }
-    }
-
+//    func append(startupInfo: Dictionary<String, AnyObject>){
+//        
+//        let props = ["_id", "name", "city", "founder"]
+//        for prop in props {
+//            let value = startupInfo[prop] as? Dictionary<String, AnyObject>
+//            self.append(value!)
+//        }
+//        
+//        if let _shares = startupInfo["shares"] as? Int {
+//            self.shares = _shares
+//            
+//        }
+//        
+//        if let _image = startupInfo["image"] as? String {
+//            if (_image.characters.count == 0){
+//                self.image = "placeholder.jpg"
+//            }
+//            else {
+//                self.image = _image
+//                
+//            }
+//        }
+//    }
 }
 
 

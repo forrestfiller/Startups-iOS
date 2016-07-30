@@ -9,11 +9,6 @@
 import UIKit
 import Alamofire
 
-//let screenWidth = UIScreen.mainScreen().bounds.width
-//let screenHeight = UIScreen.mainScreen().bounds.height
-
-
-
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var startupsTable:UITableView!
@@ -21,38 +16,34 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var viewStartupLabel = "Startup List"
     var startupVc = Startup()
 
+    // when vc is dismissed, tells listener to stop listening the dismissed vc:
     deinit{
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
-    
     
     override func loadView() {
         
         let frame = UIScreen.mainScreen().bounds
         let view = UIView(frame: frame)
-        self.view = view
-        
-        startupsTable = UITableView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height))
-        startupsTable.delegate = self
+
+        self.startupsTable = UITableView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height))
+        self.startupsTable.delegate = self
         startupsTable.dataSource = self
         self.view.addSubview(startupsTable)
-
-       
+        self.view = view
 
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = self.viewStartupLabel
+        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .Add,
             target: self,
             action: #selector(ViewController.createStartup)
         )
-        
-      
-        
-        self.title = self.viewStartupLabel
-        
-        // set up a listener:
+
         let notificationCtr = NSNotificationCenter.defaultCenter()
         notificationCtr.addObserver(
             self,
@@ -60,14 +51,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             name: "ImageDownloaded",
             object: nil
         )
-        
-
-//        notificationCtr.addObserver(
-//            self,
-//            selector:#selector(ViewController.imageDownloadNotification),
-//            name: "StartupLoaded",
-//            object: nil
-//        )
 
         let url = "https://ff-startups.herokuapp.com/api/startup"
         Alamofire.request(.GET, url, parameters:  nil).responseJSON { response in
@@ -91,13 +74,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
         self.startupsTable.reloadData()
     }
     
     func createStartup() {
         print("createStartup: ")
-        
         let createStartupVc = CreateStartupViewController()
         let nc = UINavigationController(rootViewController: createStartupVc)
         self.presentViewController(nc, animated: true, completion: nil)
@@ -129,16 +110,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
             startup.fetchImage()
             return cell
-//            
-//            if case let (startup.shares) = String(startup.shares){
-//                return cell
-//            }
-//            else {
-//                String(startup.shares)
-//                return cell
-//            }
         }
-        
         
         let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
         cell.textLabel?.text = startup.name!+"   "+startup.city!
@@ -151,31 +123,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         startup.fetchImage()
         return cell
     }
-    
-    func handlePackageFromCreateVc(startupInfo: Dictionary<String, AnyObject>){
-        print("handlePackageFromCreateVc: \(startupInfo)")
-        
-        if let newCreateName = startupInfo["name"] as? String{
-            let startup = Startup()
-            startup.name = newCreateName
-            self.startupsList.append(startup)
-            self.startupsTable.reloadData()
-            self.dismissViewControllerAnimated(true, completion: nil)
-        }
-    }
-    
-//    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]){
-//        print("didFinishPickingMediaWithInfo: \(info)")
-//        
-//        if let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-//            let image = ISImage()
-//            image.image = selectedImage
-//            image.caption = "Default Caption"
-//            self.imagesArray.append(image)
-//            self.imagesTable.reloadData()
-//            picker.dismissViewControllerAnimated(true, completion: nil)
-//        }
-//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
