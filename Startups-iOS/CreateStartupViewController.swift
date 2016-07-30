@@ -120,7 +120,9 @@ class CreateStartupViewController: UIViewController, UITextFieldDelegate {
                     
                     dispatch_async(dispatch_get_main_queue()) {
                         print("POP")
-                        self.navigationController?.popToRootViewControllerAnimated(true)
+                        self.dismissViewControllerAnimated(true, completion: { 
+                            
+                        })
                     }
                 }
             }

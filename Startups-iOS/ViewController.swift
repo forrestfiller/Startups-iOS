@@ -9,9 +9,14 @@
 import UIKit
 import Alamofire
 
+//let screenWidth = UIScreen.mainScreen().bounds.width
+//let screenHeight = UIScreen.mainScreen().bounds.height
+
+
+
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    @IBOutlet var startupsTable: UITableView!
+    var startupsTable:UITableView!
     var startupsList = Array<Startup>()
     var viewStartupLabel = "Startup List"
     var startupVc = Startup()
@@ -20,6 +25,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
+    
+    override func loadView() {
+        
+        let frame = UIScreen.mainScreen().bounds
+        let view = UIView(frame: frame)
+        self.view = view
+        
+        startupsTable = UITableView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height))
+        startupsTable.delegate = self
+        startupsTable.dataSource = self
+        self.view.addSubview(startupsTable)
+
+       
+
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -27,6 +47,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             target: self,
             action: #selector(ViewController.createStartup)
         )
+        
+      
+        
         self.title = self.viewStartupLabel
         
         // set up a listener:
@@ -76,7 +99,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         print("createStartup: ")
         
         let createStartupVc = CreateStartupViewController()
-        self.presentViewController(createStartupVc, animated: true, completion: nil)
+        let nc = UINavigationController(rootViewController: createStartupVc)
+        self.presentViewController(nc, animated: true, completion: nil)
 //pop goes back; push is for forward and showing more information
 //present is for creating something new; dismiss is when something comes from the top
 // HIG human interface guidelines for programmers
