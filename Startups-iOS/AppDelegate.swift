@@ -13,9 +13,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    var mainNC:UINavigationController?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        
+        
+        let vc = ViewController()
+        vc.view.backgroundColor = UIColor.yellowColor()
+        
+        mainNC = UINavigationController(rootViewController: vc)
+        
+        self.window?.rootViewController = mainNC
+        self.window?.becomeKeyWindow()
         return true
     }
 

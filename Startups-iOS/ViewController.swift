@@ -16,6 +16,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var viewStartupLabel = "Startup List"
     var startupVc = Startup()
 
+    deinit{
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -33,6 +37,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             name: "ImageDownloaded",
             object: nil
         )
+        
+
+//        notificationCtr.addObserver(
+//            self,
+//            selector:#selector(ViewController.imageDownloadNotification),
+//            name: "StartupLoaded",
+//            object: nil
+//        )
 
         let url = "https://ff-startups.herokuapp.com/api/startup"
         Alamofire.request(.GET, url, parameters:  nil).responseJSON { response in
@@ -120,9 +132,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         print("handlePackageFromCreateVc: \(startupInfo)")
         
         if let newCreateName = startupInfo["name"] as? String{
-            let newName = Startup()
-            newName.name = newCreateName
-            self.startupsList.append(newCreateName)
+            let startup = Startup()
+            startup.name = newCreateName
+            self.startupsList.append(startup)
             self.startupsTable.reloadData()
             self.dismissViewControllerAnimated(true, completion: nil)
         }
@@ -150,9 +162,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.deselectRowAtIndexPath(tableView.indexPathForSelectedRow!, animated: true)
         
         let startup = self.startupsList[indexPath.row]
-        let detailVc = DetailStartupViewController()
-        detailVc.startup = startup
-        self.navigationController?.pushViewController(detailVc, animated: true)
+        let detailVC = DetailStartupViewController()
+        detailVC.startup = startup
+        self.navigationController?.pushViewController(detailVC, animated: true)
     }
 
 }

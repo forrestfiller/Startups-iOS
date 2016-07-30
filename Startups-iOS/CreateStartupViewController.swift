@@ -14,8 +14,8 @@ import Alamofire
 
 class CreateStartupViewController: UIViewController, UITextFieldDelegate {
     
-    var startup: Startup!
-    let initialVc = ViewController()
+    var startup = Startup()
+    //let initialVc = ViewController()
     var startupsList = Array<Startup>()
     var startupImage: UIImageView!
     
@@ -26,6 +26,8 @@ class CreateStartupViewController: UIViewController, UITextFieldDelegate {
     var sharesTextField: UITextField!
     var btnSubmit: UIButton!
 
+   
+    
     
     override func loadView() {
         let frame = UIScreen.mainScreen().bounds
@@ -82,7 +84,8 @@ class CreateStartupViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool{
         //print("textFieldShouldReturn")
-        self.createStartup()
+       // self.createStartup()
+        self.startupsList.removeAll()
         return true
     }
     
@@ -99,22 +102,30 @@ class CreateStartupViewController: UIViewController, UITextFieldDelegate {
        //print("createStartup - package prepped: \(startupInfo.description)")
         
         let url = "https://ff-startups.herokuapp.com/api/startup/"
+
         Alamofire.request(.POST, url, parameters: startupInfo).responseJSON { response in
             // startupInfo is the package.
-            //print("sending the package via Alamofire call 1 of 4")
+//            print("sending the package via Alamofire call 1 of 4")
             if let json = response.result.value as? Dictionary<String, AnyObject>{
-                //print("sending the package via Alamofire call 2 of 4")
+//                print("sending the package via Alamofire call 2 of 4")
                 if let result = json["result"] as? Dictionary<String, AnyObject>{
-                    //print("3 of 4: \(json)")
+//                    print("3 of 4: \(json)")
+//                    print("4 of 4: \(result)")
                     
                     // HERE IS THE ISSUE --> need to handle this. No print call for populate.
                     //self.startup.populate(result)
+                    //self.startup = Startup()
                     self.startup.populate(result)
-                    print("populate??")
-                    //self.navigationController?.popViewControllerAnimated(true)
+                   
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        print("POP")
+                        self.navigationController?.popToRootViewControllerAnimated(true)
+                    }
                 }
             }
         }
+        
     }
 
 
