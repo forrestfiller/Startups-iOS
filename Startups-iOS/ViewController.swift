@@ -16,7 +16,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var viewStartupLabel = "Startup List"
     var startupVc = Startup()
 
-    // when vc is dismissed, tells listener to stop listening the dismissed vc:
+    // when vc is dismissed, tells listener to stop listening for the dismissed vc:
     deinit{
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
@@ -31,13 +31,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         startupsTable.dataSource = self
         view.addSubview(startupsTable)
         self.view = view
-
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.title = self.viewStartupLabel
-        
+        self.title = "Startups"
+
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .Add,
             target: self,
@@ -78,13 +77,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func createStartup() {
-        print("createStartup: ")
         let createStartupVc = CreateStartupViewController()
         let nc = UINavigationController(rootViewController: createStartupVc)
         self.presentViewController(nc, animated: true, completion: nil)
-//pop goes back; push is for forward and showing more information
-//present is for creating something new; dismiss is when something comes from the top
-// HIG human interface guidelines for programmers
     }
     
     func imageDownloadNotification(){

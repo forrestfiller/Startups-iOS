@@ -4,18 +4,14 @@
 //
 //  Created by Forrest Filler on 7/27/16.
 //  Copyright © 2016 forrestfiller. All rights reserved.
-//          To Dos
-//      1. add all required fields
-//      2. hook it up to backend [make a post request]
-//      3. then dismiss the Vc and head back to the intital vc
-//      4. load in the new data
+//
+
 import UIKit
 import Alamofire
 
 class CreateStartupViewController: UIViewController, UITextFieldDelegate {
     
     var startup = Startup()
-    //let initialVc = ViewController()
     var startupsList = Array<Startup>()
     var startupImage: UIImageView!
     
@@ -26,9 +22,6 @@ class CreateStartupViewController: UIViewController, UITextFieldDelegate {
     var sharesTextField: UITextField!
     var btnSubmit: UIButton!
 
-   
-    
-    
     override func loadView() {
         let frame = UIScreen.mainScreen().bounds
         let view = UIView(frame: frame)
@@ -83,14 +76,11 @@ class CreateStartupViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool{
-        //print("textFieldShouldReturn")
-       // self.createStartup()
-        self.startupsList.removeAll()
+        self.createStartup()
         return true
     }
     
-    func createStartup() { // prepare the package to send to backend, where JSON will update.
-        //print("createStartup: ")
+    func createStartup() { // prepare package to send to backend
         var startupInfo = Dictionary<String, AnyObject>()
         startupInfo["name"] = self.nameTextField.text!
         startupInfo["city"] = self.cityTextField.text!
@@ -98,48 +88,36 @@ class CreateStartupViewController: UIViewController, UITextFieldDelegate {
         startupInfo["shares"] = self.sharesTextField.text!
         //startupInfo["image"] = self.imageTextField.text!
         
-
-       //print("createStartup - package prepped: \(startupInfo.description)")
-        
         let url = "https://ff-startups.herokuapp.com/api/startup/"
-
         Alamofire.request(.POST, url, parameters: startupInfo).responseJSON { response in
-            // startupInfo is the package.
-//            print("sending the package via Alamofire call 1 of 4")
+
             if let json = response.result.value as? Dictionary<String, AnyObject>{
-//                print("sending the package via Alamofire call 2 of 4")
+
                 if let result = json["result"] as? Dictionary<String, AnyObject>{
-//                    print("3 of 4: \(json)")
-//                    print("4 of 4: \(result)")
-                    
-                    // HERE IS THE ISSUE --> need to handle this. No print call for populate.
-                    //self.startup.populate(result)
-                    //self.startup = Startup()
+
                     self.startup.populate(result)
-                   
-                    
-                    dispatch_async(dispatch_get_main_queue()) {
-                        print("POP")
-                        self.dismissViewControllerAnimated(true, completion: { 
-                            
-                        })
-                    }
+                    self.dismissViewControllerAnimated(true, completion: nil)
                 }
             }
         }
-        
     }
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "New Startup"
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .Cancel,
+            target: self,
+            action: #selector(CreateStartupViewController.cancelAndDismissThisVC)
+        )
+    }
 
+    func cancelAndDismissThisVC() {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-
     }
-
-
 }

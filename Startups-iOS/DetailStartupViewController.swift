@@ -71,7 +71,7 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
         self.btnSubmit = UIButton(type: .Custom)
         self.btnSubmit.backgroundColor = .blueColor()
         self.btnSubmit.frame = CGRect(x: 20, y: y+40, width: frame.size.width-40, height: 44)
-        self.btnSubmit.setTitle("Update Startup Info", forState: .Normal)
+        self.btnSubmit.setTitle("Update Startup", forState: .Normal)
         self.btnSubmit.setTitleColor(.whiteColor(), forState: .Normal)
         self.btnSubmit.addTarget(self, action: #selector(DetailStartupViewController.updateStartup), forControlEvents: .TouchUpInside)
         view.addSubview(self.btnSubmit)
@@ -79,12 +79,11 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool{
-        print("textFieldShouldReturn")
         self.updateStartup()
         return true
     }
     
-    func updateStartup() { // prepare the package to send to backend, where JSON will update.
+    func updateStartup() { // prep package for backend
         var startupInfo = Dictionary<String, AnyObject>()
         startupInfo["_id"] = self.startup._id!
         startupInfo["name"] = self.nameTextField.text!
@@ -98,15 +97,13 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
             startupInfo["image"] = img
         }
 
-        print("updateStartup: \(startupInfo.description)")
         let url = "https://ff-startups.herokuapp.com/api/startup/"+self.startup._id!
         Alamofire.request(.PUT, url, parameters: startupInfo).responseJSON { response in
-            // startupInfo is the package.
+
             if let json = response.result.value as? Dictionary<String, AnyObject>{
 
                 if let result = json["result"] as? Dictionary<String, AnyObject>{
-                    print("\(json)")
-                    
+
                     self.startup.populate(result)
                     self.navigationController?.popViewControllerAnimated(true)
                 }
@@ -123,7 +120,5 @@ class DetailStartupViewController: UIViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
 
     }
-    
-    
     
 }
