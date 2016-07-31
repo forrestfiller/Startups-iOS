@@ -26,10 +26,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let frame = UIScreen.mainScreen().bounds
         let view = UIView(frame: frame)
 
-        self.startupsTable = UITableView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height))
-        self.startupsTable.delegate = self
+        startupsTable = UITableView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height))
+        startupsTable.delegate = self
         startupsTable.dataSource = self
-        self.view.addSubview(startupsTable)
+        view.addSubview(startupsTable)
         self.view = view
 
     }
